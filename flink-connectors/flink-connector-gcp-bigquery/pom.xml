@@ -30,8 +30,8 @@ under the License.
 		<relativePath>..</relativePath>
 	</parent>
 
-	<artifactId>flink-connector-gcp-pubsub_${scala.binary.version}</artifactId>
-	<name>flink-connector-gcp-pubsub</name>
+	<artifactId>flink-connector-gcp-bigquery_${scala.binary.version}</artifactId>
+	<name>flink-connector-gcp-bigquery</name>
 
 	<packaging>jar</packaging>
 
@@ -41,7 +41,7 @@ under the License.
 				<!-- This is the way we get a consistent set of versions of the Google tools -->
 				<groupId>com.google.cloud</groupId>
 				<artifactId>google-cloud-bom</artifactId>
-				<version>${google-cloud-bom.version}</version>
+				<version>0.99.0-alpha</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -50,15 +50,8 @@ under the License.
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-pubsub</artifactId>
+			<artifactId>google-cloud-bigquery</artifactId>
 			<!-- Version is pulled from google-cloud-bom -->
 			<exclusions>
 				<!-- Exclude an old version of guava that is being pulled
@@ -68,6 +61,19 @@ under the License.
 					<artifactId>guava-jdk5</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zetasketch</groupId>
+			<artifactId>zetasketch</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -85,5 +91,66 @@ under the License.
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-table-common</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-table-planner_${scala.binary.version}</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-table-api-java-bridge_${scala.binary.version}</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-java</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- ================= -->
+		<!-- Test dependencies -->
+		<!-- ================= -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-scala_${scala.binary.version}</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-avro</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 </project>
